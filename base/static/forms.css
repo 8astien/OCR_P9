@@ -1,0 +1,58 @@
+.flex-wrap {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.form--solo {
+    width: 50%;
+    margin: 0 auto!;
+}
+
+h2 {
+    text-align: center;
+    padding: 32px 0;
+}
+
+.forms {
+    display: flex;
+    flex-direction: column;
+    margin: 32px auto;
+}
+
+.forms p {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.forms p input {
+    padding: 16px 32px;
+}
+
+.forms p textarea {
+    padding: 16px 32px;
+}
+
+#id_image {
+    padding: 0;
+}
+
+#id_rating {
+    display: flex;
+    justify-content: space-between;
+}
+
+.blocs {
+    width: 50%;
+    padding: 64px 128px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form--vertical {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+

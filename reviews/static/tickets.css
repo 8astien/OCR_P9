@@ -1,0 +1,10 @@
+.ticket--details {
+    border: 1px solid black;
+    padding: 16px;
+}
+
+.ticket--details__sb {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

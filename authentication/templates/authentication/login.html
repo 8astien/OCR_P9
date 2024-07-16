@@ -1,0 +1,29 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block extra_head %}
+{% comment %} <link rel="stylesheet" href="{% static 'css/forms.css' %}"> {% endcomment %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+
+{% block content %}
+<div>
+
+    <div class="flex-wrap">
+
+        <div class="blocs">
+            <h3>Inscrivez-vous maintenant</h3>
+            <a href="{% url 'authentication:signin' %}" class="button">S'inscrire</a>
+        </div>
+
+        <form class="forms blocs" method="post" action="{% url 'authentication:login' %}">
+            {% csrf_token %}
+            <h3>Connectez vous</h3>
+            {{ form.as_p }}
+            <button class="button right--button" type="submit">Se connecter</button>
+        </form>
+
+    </div>
+    
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Créer une critique</h2>
+    <div>
+        <h3>Vous êtes en train de poster en réponse à</h3>
+        <div class="ticket--details">
+            <div class="ticket--details__sb">
+                <p>{{ ticket.user.username }} a demandé une critique</p>
+                <p>{{ ticket.time_created|date:"H:i, d M Y" }}</p>
+            </div>
+            <p>{{ ticket.title }}</p>
+            <p>{{ ticket.description }}</p>
+            {% if ticket.image %}
+                <img src="{{ ticket.image.url }}" alt="Image illustrant le billet" style="max-width: 300px; max-height: 300px;">
+            {% endif %}
+        </div>
+    </div>
+    <form class="forms" method="post">
+        <h4>Critique</h4>
+        {% csrf_token %}
+        {{ form.as_p }}
+        
+        <div class="multi--button__right">
+            {% if review %}
+            <a class="button right--button button--alert" href="{% url 'reviews:delete_review' review.id %}" onclick="return confirm('Confirmer la suppression de cette critique ?');">Supprimer</a>
+            {% endif %}
+            <button type="submit" class="button right--button">{% if review %}Mettre à jour{% else %}Envoyer{% endif %}</button>
+        </div>
+
+    </form>
+</div>
+{% endblock %}

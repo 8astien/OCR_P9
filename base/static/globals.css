@@ -1,0 +1,216 @@
+/********** GLOBALS ************/
+
+:root {
+    --primary-color:#70D6FF;
+    --primary-dark: #114154;
+    --secondary-color:#FF9770;
+    --secondary-dark: #3e1809;
+    --alert:#FF70A6;
+    --valid:#419f34;
+    --font-main: 'Arial', sans-serif;
+}
+
+body {
+    font-family: var(--font-main);
+}
+
+/*********** HEADER  ***********/
+.header {
+  width: 100%; 
+  position: relative;
+  height: 120px;
+  box-shadow: inset 0px -6px 32px -3px #11415449;
+}
+
+.header .container {
+  display: flex;
+  justify-content: flex-end; 
+  align-items: center;
+  width: 100%;
+  padding: 0 20px;
+  height: 100%;
+}
+
+.header h1 {
+  position: absolute;  
+  left: 50%;  
+  top: 10px;         
+  transform: translateX(-50%);
+  margin: 0;
+  max-height: 100px;
+}
+
+.header nav ul {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.header nav ul li {
+  padding: 16px;
+  list-style-type: none;
+}
+
+.header .logo {
+  max-height: 100px;
+}
+
+/*********** BUTTON **********/
+
+.button {
+  background-color: var(--primary-color);
+  color: var(--primary-dark);
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 110ms ease-in-out, color 110ms ease-in-out, box-shadow 220ms ease-in-out;
+  outline: none;
+  text-decoration: none;
+  min-width: 160px;
+  text-align: center;
+}
+
+.button:hover, .button:focus {
+  background-color: #114154;
+  color: #FFF;
+  box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.2);
+}
+
+.right--button {
+  align-self: flex-end;
+}
+
+.multi--button__right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.multi--button__right .button {
+  margin-left: 12px;
+}
+
+.button--hidden {
+  background: none;
+  border: none;
+  color: var(--secondary-dark)
+}
+
+.button--hidden:hover {
+  color: var(--primary-dark);
+}
+
+.button--alert {
+  background-color: var(--secondary-dark);
+  color: #fff;
+}
+
+.button--alert:hover {
+  background-color: var(--secondary-color);
+}
+
+.feed--nav {
+  padding: 32px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+/***************  MESSAGES  ***************/
+
+#messages {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 5000;
+}
+
+.message {
+  display: block;
+  padding: 64px 128px;
+  font-weight: bold;
+  margin-top: 10px;
+  border-radius: 5px;
+  color: white;
+  animation: slideIn 0.5s forwards, fadeOut 3s 2.5s forwards;
+}
+
+.message.success {
+  background-color: var(--valid); 
+}
+
+.message.error {
+  background-color: var(--alert);
+}
+
+@keyframes slideIn {
+  from {
+      right: -100%;
+  }
+  to {
+      right: 20px;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+      opacity: 1;
+  }
+  to {
+      opacity: 0;
+      display: none;
+  }
+}
+
+
+/*********** RESET ***********/
+
+/*
+  1. Use a more-intuitive box-sizing model.
+*/
+*, *::before, *::after {
+    box-sizing: border-box;
+  }
+  /*
+    2. Remove default margin
+  */
+  * {
+    margin: 0;
+  }
+  /*
+    Typographic tweaks!
+    3. Add accessible line-height
+    4. Improve text rendering
+  */
+  body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  /*
+    5. Improve media defaults
+  */
+  img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+  }
+  /*
+    6. Remove built-in form typography styles
+  */
+  input, button, textarea, select {
+    font: inherit;
+  }
+  /*
+    7. Avoid text overflows
+  */
+  p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+  }
+  /*
+    8. Create a root stacking context
+  */
+  #root, #__next {
+    isolation: isolate;
+  }
+  

@@ -1,0 +1,47 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Gestion des suivis</h2>
+    <form method="post" class="forms">
+        {% csrf_token %}
+        <div class="form--vertical">
+            {% comment %} <label for="username">Nom d'utilisateur:</label> {% endcomment %}
+            <input type="text" id="username" name="username" value="{{ form.username.value|default_if_none:'' }}" placeholder="Nom d'utilisateur à suivre">
+            {% for error in form.username.errors %}
+                <div class="error-message">{{ error }}</div>
+            {% endfor %}
+            <button class="button" type="submit">Suivre</button>
+        </div>
+    </form>
+    <h2>Abonnements :</h2>
+    <ul class="list">
+        {% for user in follows %}
+        <li>{{ user.username }}<a href="{% url 'user_management:unfollow_user' user.username %}">Désabonner</a></li>
+        {% empty %}
+        <p>Vous ne suivez personne.</p>
+        {% endfor %}
+    </ul>
+    <h2>Abonnés :</h2>
+    <ul class="list">
+        {% for user in followers %}
+        <li>{{ user.username }}</li>
+        {% empty %}
+        <p>Aucun abonné.</p>
+        {% endfor %}
+    </ul>
+
+    <div id="messages">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="message {{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    
+
+</div>
+{% endblock %}

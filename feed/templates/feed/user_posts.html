@@ -1,0 +1,79 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    {% if show_navigation_buttons %}
+        <div class="feed--nav">
+            <a href="{% url 'reviews:create_ticket' %}" class="button">Demander une critique</a>
+            <a href="{% url 'reviews:review-ticket-creation' %}" class="button">Créer une critique</a>
+        </div>
+    {% else %}
+        <h2>Vos publications</h2>
+    {% endif %}
+    {% for post in all_posts %}
+        <div class="post {{ post.content_type|lower }}">
+            {% if post.content_type == 'TICKET' %}
+                <h3>{{ post.title }}</h3>
+                <div class="ticket--details__sb">
+                    <p>Ticket - {{ post.user.username }}</p>
+                    <p>{{ post.time_created|date:"H:i, d M Y" }}</p>
+                </div>
+                <p>{{ post.description }}</p>
+                {% if post.image %}
+                    <img src="{{ post.image.url }}" alt="Image liée au ticket" class="post-image">
+                {% endif %}
+                {% if allow_edit %}
+                <div class="multi--button__right">
+                    <a href="{% url 'reviews:update_ticket' post.id %}" class="button right--button">Modifier</a>
+                    <a href="{% url 'reviews:delete_ticket' post.id %}" class="button right--button button--alert" onclick="return confirm('Confirmer la suppression de ce ticket ?');">Supprimer</a>
+                </div>
+                {% endif %}
+                {% if allow_review %}
+                <div class="multi--button__right">
+                    <a href="{% url 'reviews:respond_to_ticket' post.id  %}" class="button right--button">Créer une critique</a>
+                </div>
+                {% endif %}
+            {% elif post.content_type == 'REVIEW' %}
+                <h3>Critique pour : {{ post.ticket.title }}</h3>
+                <div class="ticket--details__sb">
+                    <p>Review - {{ post.user.username }}</p>
+                    <p>{{ post.time_created|date:"H:i, d M Y" }}</p>
+                </div>
+                <div class="rating">
+                    <span id="stars_{{ forloop.counter }}" data-rating="{{ post.rating }}"></span>
+                </div>
+                <p>{{ post.body }}</p>
+                <div class="ticket-info">
+                    <strong> {{ post.ticket.title }}</strong>
+                    <p>Ticket - {{ post.ticket.user.username }}</p>
+                    <p>{{ post.ticket.description }}</p>
+                    {% if post.ticket.image %}
+                        <img src="{{ post.ticket.image.url }}" alt="Image liée au ticket associé" class="ticket-image">
+                    {% endif %}
+                </div>
+                {% if allow_edit %}
+                <div class="multi--button__right">
+                    <a href="{% url 'reviews:update_review' post.ticket.id post.id %}" class="button right--button">Modifier</a>
+                    <a href="{% url 'reviews:delete_review' post.id %}" class="button right--button button--alert" onclick="return confirm('Confirmer la suppression de cette critique ?');">Supprimer</a>
+                </div>
+                {% endif %}
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var starsContainers = document.querySelectorAll('.rating span');
+        starsContainers.forEach(function(starsContainer) {
+            let rating = parseInt(starsContainer.getAttribute('data-rating'), 10);
+            let starsHtml = '';
+            for (let i = 0; i < rating; i++) {
+                starsHtml += '★';
+            }
+            starsContainer.innerHTML = starsHtml;
+        });
+    });
+</script>
+{% endblock %}

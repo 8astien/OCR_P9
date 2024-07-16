@@ -1,0 +1,28 @@
+
+
+.form--vertical .button {
+    height: 60px;
+    margin: auto 0;
+}
+
+.form--vertical #username {
+    width: 80%;
+}
+
+.form--vertical #username::placeholder {
+    text-align: center; 
+} 
+
+.list {
+    padding: 0;
+}
+
+.list li {
+    list-style-type: none;
+    margin: 0;
+    padding: 16px 8px;
+    border-bottom: 1px solid grey;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

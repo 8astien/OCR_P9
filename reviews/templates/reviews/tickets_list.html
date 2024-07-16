@@ -1,0 +1,14 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Liste des Billets</h2>
+    <ul>
+        {% for ticket in tickets %}
+        <li>
+            {{ ticket.title }} - <a href="{% url 'reviews:update_ticket' ticket.id %}">Modifier</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

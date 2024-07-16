@@ -1,0 +1,38 @@
+{% load static %}
+
+<header class="header">
+    <div class="container">
+        <h1>
+            <a href="{% url 'feed:home' %}">
+                <img class="logo" alt="logo LIT Revu" src="{% static 'logo_litrevu.png' %}" alt="LITRevu Logo">
+            </a>
+        </h1>
+        <nav>
+            <ul>
+                {% if user.is_authenticated %}
+                <li>
+                    <form action="{% url 'feed:home' %}" method="get">
+                        <button type="submit" class="button--hidden">Flux</button>
+                    </form>
+                </li>
+                <li>
+                    <form action="{% url 'feed:user_posts' %}" method="get">
+                        <button type="submit" class="button--hidden">Posts</button>
+                    </form>
+                </li>
+                <li>
+                    <form action="{% url 'user_management:manage_follows' %}" method="get">
+                        <button type="submit" class="button--hidden">Abonnements</button>
+                    </form>
+                </li>
+                <li>
+                    <form action="{% url 'authentication:logout' %}" method="post">
+                        {% csrf_token %}
+                        <button class="button--hidden" type="submit">Se Déconnecter</button>
+                    </form>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</header>

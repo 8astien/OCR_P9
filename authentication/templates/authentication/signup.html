@@ -1,0 +1,29 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/forms.css' %}">
+{% endblock %}
+
+{% block content %}
+<div>
+    <h2>Création de compte</h2>
+    
+    <form class="form--solo forms" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="multi--button__right">
+            <a href="{{ request.META.HTTP_REFERER }}" class="button">Retour</a>
+            <button class="button " type="submit">S'inscrire</button>
+        </div>        
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            {% for message in messages %}
+                alert("{{ message }}");
+            {% endfor %}
+        });
+    </script>
+</div>
+{% endblock %}

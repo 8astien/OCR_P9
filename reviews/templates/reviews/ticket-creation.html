@@ -1,0 +1,23 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>{% if ticket %}Modifier un billet{% else %}Créer un nouveau billet{% endif %}</h2>
+    <form class="forms" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% if ticket.image %}
+        <div>
+            <label>Image actuelle:</label>
+            <img src="{{ ticket.image.url }}" alt="Image du billet" style="max-width: 300px; max-height: 300px;"/>
+        </div>
+        {% endif %}
+        <div class="multi--button__right">
+            {% if ticket %}
+            <a class="button right--button button--alert" href="{% url 'reviews:delete_ticket' ticket.id %}" class="button" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce billet ?');">Supprimer</a>
+            {% endif %}
+            <button type="submit" class="button right--button">{% if ticket %}Mettre à jour{% else %}Envoyer{% endif %}</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
