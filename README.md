@@ -12,13 +12,13 @@ Suivez ces étapes pour configurer le projet en local.
 
 ```bash
 git clone https://github.com/8astien/OCR_P9
-cd LITRevu
+cd OCR_P9
 ```
 
 ### Configurer l'environnement virtuel
 
 ```bash
-python -m venv venv
+python3 -m venv venv
 source venv/bin/activate  # Sur Windows: venv\Scripts\activate
 ```
 
