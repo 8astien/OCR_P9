@@ -10,6 +10,7 @@
         </div>
     {% else %}
         <h2>Vos publications</h2>
+    
     {% endif %}
     {% for post in all_posts %}
         <div class="post {{ post.content_type|lower }}">
@@ -61,6 +62,17 @@
             {% endif %}
         </div>
     {% endfor %}
+
+    <div id="messages">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="message {{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
 </div>
 
 <script>
@@ -76,4 +88,5 @@
         });
     });
 </script>
+
 {% endblock %}

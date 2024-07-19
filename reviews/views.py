@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import ReviewForm, TicketForm
@@ -73,6 +74,11 @@ def create_or_update_review(request, ticket_id, review_id=None):
 @login_required
 def respond_to_ticket(request, ticket_id):
     ticket = get_object_or_404(Ticket, pk=ticket_id)
+    
+    if Review.objects.filter(ticket=ticket, user=request.user).exists():
+        messages.error(request, "Vous avez déjà posté une critique pour ce ticket.")
+        return redirect("feed:user_posts")
+    
     if request.method == "POST":
         form = ReviewForm(request.POST)
         if form.is_valid():
